@@ -9,6 +9,7 @@
 require_once __DIR__ . "/includes/class-message-shortcode.php";
 require_once __DIR__ . "/includes/class-gmap-shortcode.php";
 require_once __DIR__ . "/includes/class-contact-form-shortcode.php";
+require_once __DIR__ . "/includes/class-asset-manager.php";
 class Shortcode_IC {
     function __construct() {
         add_action('init', [$this, 'init']);
@@ -17,9 +18,11 @@ class Shortcode_IC {
     function init() {
         load_plugin_textdomain('shortcode-ic', false, dirname(plugin_basename(__FILE__)) . '/languages');
         add_shortcode('hello-world', [$this, 'hello_world']);
+        new AssetManager_IC();
         new Message_Shortcode_IC();
         new GMAP_Shortcode_IC();
         new ContactForm_Shortcode_IC();
+
     }
 
     function hello_world($atts, $content = null) {
